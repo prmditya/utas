@@ -1,0 +1,3 @@
+[build]
+  command = "prisma generate && pnpm run build"
+  publish = ".next"
