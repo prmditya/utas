@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import Providers from "@/components/providers/providers";
-import { AppSidebar } from "@/components/app-sidebar";
-import PageShell from "@/components/page-shell";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -11,8 +10,11 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Utas",
+  title: "utas - A Twitter Clone",
   description: "Twitter clone",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -21,12 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} antialiased`}>
-        <Providers>
-          <AppSidebar />
-          <PageShell>{children}</PageShell>
-        </Providers>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Providers>{children}</Providers>
+        </ThemeProvider>
       </body>
     </html>
   );

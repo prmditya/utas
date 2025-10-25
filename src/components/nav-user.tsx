@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import { signOut } from "next-auth/react";
-import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 import Link from "next/dist/client/link";
 
 export function NavUser({
@@ -40,6 +40,7 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
+  const router = useRouter();
 
   return (
     <SidebarMenu>
@@ -106,7 +107,12 @@ export function NavUser({
               <Link
                 href="/login"
                 className="flex items-center gap-2 text-destructive"
-                onClick={() => signOut()}
+                onClick={() => {
+                  signOut({
+                    redirect: true,
+                    callbackUrl: "/login",
+                  });
+                }}
               >
                 <LogOut className="text-destructive" />
                 Log out

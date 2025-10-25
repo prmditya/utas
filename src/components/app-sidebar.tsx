@@ -1,4 +1,6 @@
-import { Home, Search, Settings } from "lucide-react";
+"use client";
+import { GalleryVerticalEnd, Home, Search, Settings } from "lucide-react";
+import Image from "next/image";
 
 import {
   Sidebar,
@@ -6,13 +8,16 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import { Separator } from "@radix-ui/react-separator";
+
 import { NavUser } from "./nav-user";
+import { useSession } from "next-auth/react";
 
 // Menu items.
 const items = [
@@ -34,19 +39,50 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const { data: session } = useSession();
+
+  if (!session) {
+    return null;
+  }
+
   return (
     <Sidebar>
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="lg" asChild>
+              <a href="/home" className="flex items-center gap-2">
+                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                  <Image
+                    src="/assets/logo.webp"
+                    alt="Utas Logo"
+                    width={32}
+                    height={32}
+                  />
+                </div>
+                <div className="flex flex-col ">
+                  <span className="font-bold text-4xl">utas</span>
+                </div>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Utas</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="py-3">
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
+                <SidebarMenuItem key={item.title} className="my-1">
+                  <SidebarMenuButton>
+                    <a
+                      href={item.url}
+                      className="flex items-center gap-2 text-lg "
+                    >
+                      <item.icon className="w-6 h-6" /> {/* icon size */}
+                      <span className="text-base font-medium">
+                        {item.title}
+                      </span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -58,8 +94,8 @@ export function AppSidebar() {
       <SidebarFooter>
         <NavUser
           user={{
-            name: "John Doe",
-            email: "john@example.com",
+            name: session.user?.name || "John Doe",
+            email: session.user?.email || "john@example.com",
             avatar: "/path/to/avatar.jpg",
           }}
         />
