@@ -16,6 +16,15 @@ function dateFormatter(dateString: string) {
   });
 }
 
+type Post = {
+  id: string;
+  content: string;
+  createdAt: string;
+  author: {
+    username: string;
+  };
+};
+
 export default function HomePage() {
   const { data: posts, isLoading } = useGetPosts();
 
@@ -25,7 +34,7 @@ export default function HomePage() {
         <h1 className="text-3xl font-bold mt-2">Latest Post</h1>
 
         {/* Example posts or messages */}
-        {posts?.map((post) => (
+        {posts?.map((post: Post) => (
           <CardPost
             key={post.id}
             username={post.author.username}
