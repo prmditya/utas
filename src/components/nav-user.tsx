@@ -27,7 +27,6 @@ import {
 } from "@/components/ui/sidebar";
 
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Link from "next/dist/client/link";
 
 export function NavUser({
@@ -40,7 +39,6 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
-  const router = useRouter();
 
   return (
     <SidebarMenu>

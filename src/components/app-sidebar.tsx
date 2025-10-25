@@ -1,5 +1,5 @@
 "use client";
-import { GalleryVerticalEnd, Home, Search, Settings } from "lucide-react";
+import { Home, Search, Settings } from "lucide-react";
 import Image from "next/image";
 
 import {
@@ -13,8 +13,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-
-import { Separator } from "@radix-ui/react-separator";
 
 import { NavUser } from "./nav-user";
 import { useSession } from "next-auth/react";

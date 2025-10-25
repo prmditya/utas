@@ -1,5 +1,4 @@
 "use client";
-import { GalleryVerticalEnd } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -12,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { useRegister } from "../hooks/use-register";
+import Image from "next/image";
 
 export function RegisterForm({
   className,
@@ -51,7 +51,12 @@ export function RegisterForm({
               className="flex flex-col items-center gap-2 font-medium"
             >
               <div className="flex size-8 items-center justify-center rounded-md">
-                <GalleryVerticalEnd className="size-6" />
+                <Image
+                  src="/assets/logo.webp"
+                  alt="Utas Logo"
+                  width={48}
+                  height={48}
+                />
               </div>
               <span className="sr-only">Utas.</span>
             </a>

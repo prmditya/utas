@@ -9,7 +9,7 @@ export default function InputPost() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const content = formData.get("content")?.toString().trim();
+    const content = formData.get("content")?.toString().trim() ?? "";
     createPost({ content });
   };
 

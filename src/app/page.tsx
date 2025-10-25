@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter();
   useEffect(() => {
     router.push("/home");
-  }, []);
+  }, [router]);
 
   return (
     <div className="flex flex-col justify-center items-center h-svh w-full">

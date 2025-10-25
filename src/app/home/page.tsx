@@ -26,7 +26,7 @@ type Post = {
 };
 
 export default function HomePage() {
-  const { data: posts, isLoading } = useGetPosts();
+  const { data: posts } = useGetPosts();
 
   return (
     <main className="flex flex-col h-screen w-[90%] md:w-[70%] mx-auto ">
