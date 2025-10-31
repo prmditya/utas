@@ -44,7 +44,7 @@ export function AppSidebar() {
   }
 
   return (
-    <Sidebar>
+    <Sidebar className="z-30">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -59,7 +59,7 @@ export function AppSidebar() {
                   />
                 </div>
                 <div className="flex flex-col ">
-                  <span className="font-bold text-4xl">utas</span>
+                  <span className="font-bold text-2xl">utas</span>
                 </div>
               </a>
             </SidebarMenuButton>

@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Loader } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function Home() {
   const router = useRouter();
@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col justify-center items-center h-svh w-full">
-      <Loader className="animate-spin mr-3 text-primary size-10 " />
+      <Spinner />
     </div>
   );
 }

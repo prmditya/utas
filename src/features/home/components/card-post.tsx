@@ -1,9 +1,3 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface CardPostProps extends React.ComponentProps<"div"> {
@@ -21,8 +15,8 @@ export default function CardPost({
   ...props
 }: CardPostProps) {
   return (
-    <Card className="w-full " {...props}>
-      <CardHeader className="flex flex-row items-center gap-3">
+    <div className="w-full space-y-4 p-4" {...props}>
+      <div className="flex flex-row items-center gap-3">
         <Avatar>
           <AvatarImage src={avatarUrl} alt="user avatar" />
           <AvatarFallback>
@@ -33,13 +27,13 @@ export default function CardPost({
           <h3 className="font-semibold text-sm">{username}</h3>
           <p className="text-xs text-muted-foreground">@{username}</p>
         </div>
-      </CardHeader>
+      </div>
 
-      <CardContent className="text-sm">{content}</CardContent>
+      <div className="text-sm">{content}</div>
 
-      <CardFooter className="flex justify-end">
+      <div className="flex justify-end">
         <p className="text-xs text-muted-foreground">{date}</p>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 }

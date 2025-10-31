@@ -28,6 +28,7 @@ import {
 
 import { signOut } from "next-auth/react";
 import Link from "next/dist/client/link";
+import { Button } from "./ui/button";
 
 export function NavUser({
   user,
@@ -102,9 +103,8 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link
-                href="/login"
-                className="flex items-center gap-2 text-destructive"
+              <div
+                className="flex items-center gap-2 text-destructive w-full"
                 onClick={() => {
                   signOut({
                     redirect: true,
@@ -114,7 +114,7 @@ export function NavUser({
               >
                 <LogOut className="text-destructive" />
                 Log out
-              </Link>
+              </div>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
