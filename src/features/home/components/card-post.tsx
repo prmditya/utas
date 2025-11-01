@@ -15,7 +15,7 @@ export default function CardPost({
   ...props
 }: CardPostProps) {
   return (
-    <div className="w-full space-y-4 p-4" {...props}>
+    <div className="w-full space-y-4 p-4 py-7" {...props}>
       <div className="flex flex-row items-center gap-3">
         <Avatar>
           <AvatarImage src={avatarUrl} alt="user avatar" />
@@ -29,7 +29,7 @@ export default function CardPost({
         </div>
       </div>
 
-      <div className="text-sm">{content}</div>
+      <div className="text-md">{content}</div>
 
       <div className="flex justify-end">
         <p className="text-xs text-muted-foreground">{date}</p>

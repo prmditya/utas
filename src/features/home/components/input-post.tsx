@@ -9,7 +9,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { toast } from "sonner";
 
 const inputPostSchema = z.object({
-  content: z.string().min(5, "Too short"),
+  content: z.string().min(1, "Too short"),
 });
 
 export default function InputPost() {
@@ -38,36 +38,32 @@ export default function InputPost() {
     });
   };
 
-  const isSubmitting = form.formState.isSubmitting || isPending;
-
   return (
-    <div className="sticky bottom-0 p-4 z-50">
+    <div className="sticky bottom-0 pb-2 md:pb-4 z-50 w-full px-1">
       <form
-        className="relative w-full md:w-xl lg:w-2xl mx-auto"
+        className="flex items-center w-full md:w-xl lg:w-2xl mx-auto "
         onSubmit={form.handleSubmit(postContent)}
       >
         <Controller
           name="content"
           control={form.control}
           render={({ field, formState }) => (
-            <>
+            <div className="flex flex-col w-screen resize-none p-2 md:p-4 backdrop-blur-md bg-slate-900/10 rounded-xl border mx-auto ">
               <Textarea
-                className="h-[100px] w-[98%] resize-none p-4 pr-12 backdrop-blur-md"
                 placeholder="What's on your mind?"
-                disabled={isSubmitting}
+                disabled={isPending}
+                className="resize-none border-0 bg-transparent! focus-visible:ring-0 focus-visible:ring-offset-0 "
                 {...field}
               />
               <Button
                 type="submit"
                 size="icon"
-                className="absolute right-2 bottom-2 size-9 z-10"
-                disabled={
-                  isSubmitting || !formState.isDirty || !formState.isValid
-                }
+                className="ml-auto size-9"
+                disabled={isPending || !formState.isDirty || !formState.isValid}
               >
-                {isSubmitting ? <Spinner fontSize={24} /> : <Send size={24} />}
+                {isPending ? <Spinner fontSize={24} /> : <Send size={24} />}
               </Button>
-            </>
+            </div>
           )}
         />
       </form>

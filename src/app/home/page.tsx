@@ -3,6 +3,7 @@ import InputPost from "@/features/home/components/input-post";
 import CardPost from "@/features/home/components/card-post";
 import { useGetPosts } from "@/features/home/hooks/use-post";
 import { Separator } from "@/components/ui/separator";
+import LoadingPage from "@/components/loading-page";
 
 function dateFormatter(dateString: string) {
   const date = new Date(dateString);
@@ -27,13 +28,16 @@ type Post = {
 };
 
 export default function HomePage() {
-  const { data: posts } = useGetPosts();
+  const { data: posts, isLoading } = useGetPosts();
+
+  if (isLoading) return <LoadingPage iconSize="LARGE" />;
 
   return (
-    <main className="flex flex-col h-screen items-center">
+    <main className="flex flex-col h-100vh items-center pt-14">
       {/* Posts Section */}
+
       {posts?.map((post: Post) => (
-        <section key={post.id} className="w-full md:w-[600px] border-x">
+        <section key={post.id} className="w-full md:w-[600px] sm:border-x">
           <CardPost
             username={post.author.username}
             content={post.content}
@@ -48,13 +52,12 @@ export default function HomePage() {
       {/* Gradient*/}
       <div
         className="
-          fixed bottom-0 w-full h-40 
-          bg-gradient-to-t from-background to-transparent 
-          z-10 // Sedikit lebih rendah dari InputPost
+          fixed bottom-0 w-full h-50 
+          bg-linear-to-t from-background to-transparent 
+          z-10
         "
       >
-        {/* Height*/}
-        <div className="max-w-[600px] h-full mx-auto border-x" />
+        <div className="max-w-screen h-full mx-auto" />
       </div>
 
       <InputPost />

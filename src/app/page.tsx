@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Spinner } from "@/components/ui/spinner";
+import LoadingPage from "@/components/loading-page";
 
 export default function Home() {
   const router = useRouter();
@@ -9,9 +9,5 @@ export default function Home() {
     router.push("/home");
   }, [router]);
 
-  return (
-    <div className="flex flex-col justify-center items-center h-svh w-full">
-      <Spinner />
-    </div>
-  );
+  return <LoadingPage iconSize="MEDIUM" />;
 }

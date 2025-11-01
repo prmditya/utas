@@ -1,5 +1,5 @@
 "use client";
-import { Home, Search, Settings } from "lucide-react";
+import { Home, Search, Settings, LogOut } from "lucide-react";
 import Image from "next/image";
 
 import {
@@ -8,6 +8,7 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -15,7 +16,8 @@ import {
 } from "@/components/ui/sidebar";
 
 import { NavUser } from "./nav-user";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { ModeToggle } from "./mode-toggle";
 
 // Menu items.
 const items = [
@@ -29,9 +31,12 @@ const items = [
     url: "#",
     icon: Search,
   },
+];
+
+const other = [
   {
     title: "Settings",
-    url: "/settings",
+    url: "/home",
     icon: Settings,
   },
 ];
@@ -69,15 +74,16 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu className="py-3">
+            <SidebarGroupLabel>Main</SidebarGroupLabel>
+            <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title} className="my-1">
                   <SidebarMenuButton>
                     <a
                       href={item.url}
-                      className="flex items-center gap-2 text-lg "
+                      className="flex items-center gap-2 text-md"
                     >
-                      <item.icon className="w-6 h-6" /> {/* icon size */}
+                      <item.icon className="size-4" /> {/* icon size */}
                       <span className="text-base font-medium">
                         {item.title}
                       </span>
@@ -86,6 +92,41 @@ export function AppSidebar() {
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup className="mt-auto">
+          <SidebarGroupContent>
+            <SidebarGroupLabel>Other</SidebarGroupLabel>
+            {other.map((item) => (
+              <SidebarMenuItem key={item.title} className="my-1">
+                <SidebarMenuButton>
+                  <a
+                    href={item.url}
+                    className="flex items-center gap-2 text-md "
+                  >
+                    <item.icon className="size-4" /> {/* icon size */}
+                    <span className="text-base font-medium">{item.title}</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+
+            <SidebarMenuItem className="my-1">
+              <SidebarMenuButton>
+                <ModeToggle />
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem className="my-1">
+              <SidebarMenuButton>
+                <div
+                  className="flex items-center gap-2 text-md text-red-400 w-full"
+                  onClick={() => signOut()}
+                >
+                  <LogOut className="size-4" />
+                  <span className="text-base font-medium">Log Out</span>
+                </div>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
